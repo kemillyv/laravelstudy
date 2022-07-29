@@ -2,11 +2,22 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+
 
 class Handler extends ExceptionHandler
 {
+    public function report(Throwable $exception)
+    {
+        parent::report($exception);
+    }
+    public function render($request, Throwable $exception)
+    {
+        return parent::render($request, $exception);
+    }
+
+  
     /**
      * A list of the exception types that are not reported.
      *
@@ -26,16 +37,6 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+  
 
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
-    }
 }
